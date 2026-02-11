@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Toko Saya - E-commerce</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com'>
-  <link rel='stylesheet' href='https://fonts.googleapis.com'>
-  <!-- CSS Internal untuk contoh ini -->
-  <style>
-    .page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif; }
-    .four_zero_four_bg{ background-image: url(https://cdn.dribbble.com); height: 400px; background-position: center; }
-    .link_404{ color: #fff!important; padding: 10px 20px; background: #39ac31; margin: 20px 0; display: inline-block;}
-  </style>
+  <title>Animated 404 | @coding.stella</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Arvo'><link rel="stylesheet" href="./style.css">
+
 </head>
 <body>
 
@@ -19,11 +14,15 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="col-sm-10 col-sm-offset-1 text-center">
-          <div class="four_zero_four_bg"><h1 class="text-center">404</h1></div>
+          <div class="four_zero_four_bg">
+            <h1 class="text-center">404</h1>
+          </div>
+
           <div class="contant_box_404">
             <h3 class="h2">Look like you're lost</h3>
-            <p>Sistem sedang menghubungkan ke Database Supabase...</p>
-            <div id="status-db" style="font-weight: bold; color: orange;">Status: Memuat Library...</div>
+
+            <p>the page you are looking for not avaible!</p>
+
             <a href="" class="link_404">Go to Home</a>
           </div>
         </div>
@@ -31,56 +30,6 @@
     </div>
   </div>
 </section>
-
-<!-- 1. IMPORT LIBRARY (Gunakan ID agar mudah dicek) -->
-<script id="supabase-sdk" src="https://cdn.jsdelivr.net"></script>
-
-<script>
-  const statusEl = document.getElementById('status-db');
-
-  // FUNGSI UTAMA UNTUK CONNECT
-  function hubungkanSupabase() {
-    try {
-      const supabaseUrl = 'https://qwqhsqqjhujpiulsesnu.supabase.co';
-      const supabaseKey = 'sb_publishable_DcZ6hZEQ7C4Hcg60GEhOlg_DI-VTTW5';
-
-      // CEK APAKAH OBJECT 'supabase' SUDAH ADA DI WINDOW
-      if (typeof supabase !== 'undefined') {
-        window.supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-        console.log("✅ BERHASIL: Supabase Client Aktif!");
-        statusEl.innerHTML = "Status: ✅ Database Terhubung!";
-        statusEl.style.color = "green";
-        
-        // Tes ambil data
-        cekData();
-      } else {
-        throw new Error("Library Supabase belum terdeteksi di browser.");
-      }
-    } catch (err) {
-      console.error("❌ ERROR:", err.message);
-      statusEl.innerHTML = "Status: ❌ Gagal (Cek Koneksi Internet)";
-      statusEl.style.color = "red";
-    }
-  }
-
-  async function cekData() {
-    const { data, error } = await window.supabaseClient.from('products').select('*');
-    if (error) console.warn("Peringatan: Tabel products belum siap/kosong.");
-    else console.log("Data Produk:", data);
-  }
-
-  // 2. MEKANISME ANTI-GAGAL: TUNGGU SAMPAI SCRIPT SELESAI LOAD
-  const sdkScript = document.getElementById('supabase-sdk');
-  sdkScript.onload = () => {
-    console.log("Library SDK Terunduh. Memulai koneksi...");
-    hubungkanSupabase();
-  };
-
-  // Cadangan jika onload tidak terpicu
-  window.addEventListener('load', () => {
-    if (!window.supabaseClient) hubungkanSupabase();
-  });
-</script>
 
 </body>
 </html>
