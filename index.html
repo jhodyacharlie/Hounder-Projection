@@ -2,8 +2,6 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <!-- 1. Panggil library Supabase dulu -->
-<script src="https://cdn.jsdelivr.net"></script>
   <title>erorr-404</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Arvo'><link rel="stylesheet" href="./style.css">
@@ -33,29 +31,6 @@
   </div>
 </section>
 
-
-<script>
-  // Kita buat variabelnya jadi 'window' agar bisa diakses dari mana saja (Console/File lain)
-  window.supabaseUrl = 'https://qwqhsqqjhujpiulsesnu.supabase.co';
-  window.supabaseKey = 'sb_publishable_DcZ6hZEQ7C4Hcg60GEhOlg_DI-VTTW5';
-  
-  // Inisialisasi secara global
-  window.supabaseClient = supabase.createClient(window.supabaseUrl, window.supabaseKey);
-
-  console.log("Mencoba koneksi ke Supabase...");
-
-  // Fungsi tes
-  async function testKoneksi() {
-    const { data, error } = await window.supabaseClient.from('products').select('*');
-    if (error) {
-      console.log("Koneksi OK, tapi tabel belum ada atau RLS terkunci:", error.message);
-    } else {
-      console.log("Koneksi SUKSES TOTAL! Data:", data);
-    }
-  }
-
-  testKoneksi();
-</script>
 
 </body>
 </html>
