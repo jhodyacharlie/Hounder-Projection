@@ -32,15 +32,31 @@
 </section>
   <script src="https://cdn.jsdelivr.net"></script>
 <script src="https://cdn.jsdelivr.net"></script>
+<!-- 1. Panggil library Supabase dulu -->
+<script src="https://cdn.jsdelivr.net"></script>
+
 <script>
-  // Hubungkan ke Supabase Anda
+  // 2. Inisialisasi (Buat variabelnya dulu)
   const supabaseUrl = 'https://qwqhsqqjhujpiulsesnu.supabase.co'
   const supabaseKey = 'sb_publishable_DcZ6hZEQ7C4Hcg60GEhOlg_DI-VTTW5'
+  
+  // Pastikan baris ini ada SEBELUM fungsi apa pun yang memakai kata 'supabase'
   const supabase = supabase.createClient(supabaseUrl, supabaseKey)
 
-  // Tes koneksi: Mencoba ambil data (ini akan kosong dulu karena tabel belum dibuat)
-  console.log("Supabase berhasil terhubung!");
+  // 3. Baru panggil fungsinya
+  async function getProducts() {
+    const { data, error } = await supabase.from('products').select('*')
+    if (error) {
+      console.error('Error:', error)
+    } else {
+      console.log('Data Produk:', data)
+    }
+  }
+
+  // Jalankan fungsi
+  getProducts();
 </script>
+
 
 
 
