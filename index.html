@@ -36,27 +36,35 @@
 
 
 
+
+
 <script>
-  // 2. Inisialisasi (Buat variabelnya dulu)
-  const supabaseUrl = 'https://qwqhsqqjhujpiulsesnu.supabase.co'
-  const supabaseKey = 'sb_publishable_DcZ6hZEQ7C4Hcg60GEhOlg_DI-VTTW5'
-  
-  // Pastikan baris ini ada SEBELUM fungsi apa pun yang memakai kata 'supabase'
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey)
+  // 2. Gunakan blok try-catch agar kita tahu persis di mana letak error-nya
+  try {
+    const supabaseUrl = 'https://qwqhsqqjhujpiulsesnu.supabase.co';
+    const supabaseKey = 'sb_publishable_DcZ6hZEQ7C4Hcg60GEhOlg_DI-VTTW5';
+    
+    // Inisialisasi client
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-  // 3. Baru panggil fungsinya
-  async function getProducts() {
-    const { data, error } = await supabase.from('products').select('*')
-    if (error) {
-      console.error('Error:', error)
-    } else {
-      console.log('Data Produk:', data)
-    }
+    // 3. Masukkan fungsi ke dalam async agar tertata
+    const fetchProducts = async () => {
+      const { data, error } = await supabaseClient.from('products').select('*');
+      if (error) {
+        console.error('Gagal ambil data:', error.message);
+      } else {
+        console.log('Koneksi Berhasil! Data Produk:', data);
+      }
+    };
+
+    // Jalankan fungsi setelah semuanya siap
+    fetchProducts();
+
+  } catch (err) {
+    console.error('Error Inisialisasi:', err.message);
   }
-
-  // Jalankan fungsi
-  getProducts();
 </script>
+
 
 
 
